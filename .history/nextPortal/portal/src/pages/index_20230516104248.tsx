@@ -1,10 +1,25 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { Inter } from '@next/font/google';
+import styles from '@/styles/Home.module.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
     return (
+      axios
+      .post(
+          `https://localhost:44311/api/services/app/Movie/Create/`,
+          values
+      )
+      .then((res) => {
+          const newMovie: Movie = res.data.result;
+          setMovies((prevMovies) => [...prevMovies, newMovie]);
+          setAddModalVisible(false);
+      })
+      .catch((error) => console.error(error));
+});
+
         <>
             <Head>
                 <title>Grim Movies</title>
@@ -16,13 +31,8 @@ export default function Home() {
             </Head>
             <h1>Hello World</h1>
 
-            <form>
-                <label>
-                    Name:
-                    <input type="text" name="name" />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+            
+            
         </>
     );
 }
